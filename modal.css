@@ -153,16 +153,17 @@ main {
   font-size: 16px;
 }
 
-.bground {
+.bground, .bgroundEnd {
   display: none;
   position: fixed;
   z-index: 1;
   left: 0;
   top: 0;
-  height: 100%;
+  height: 100vh;
   width: 100%;
   overflow: auto;
-  background-color: rgba(26, 39, 156, 0.4);
+  /* background-color: rgba(26, 39, 156, 0.4); */
+  background-color: white;
 }
 
 .content {
@@ -183,7 +184,14 @@ main {
   padding: 15px 8%;
   margin: 15px auto;
 }
+.end-headline{
+  /* display: flex; */
+  /* align-items: center; */
 
+  font-style: normal;
+  text-align: center;
+  margin:18.5rem 0 18.5rem 0;
+}
 label {
   font-family: var(--font-default);
   font-size: 0.9rem;
@@ -295,7 +303,7 @@ form[data-error="true"] span{
   left: 21%;
   top: 19%;
 }
-.close {
+.close, .closeEnd {
   position: absolute;
   right: 15px;
   top: 15px;
@@ -306,7 +314,9 @@ form[data-error="true"] span{
   transform: scale(0.7);
 }
 .close:before,
-.close:after {
+.close:after,
+.closeEnd:before,
+.closeEnd:after{
   position: absolute;
   left: 15px;
   content: " ";
@@ -314,10 +324,10 @@ form[data-error="true"] span{
   width: 3px;
   background-color: #fff;
 }
-.close:before {
+.close:before, .closeEnd:before {
   transform: rotate(45deg);
 }
-.close:after {
+.close:after, .closeEnd:after {
   transform: rotate(-45deg);
 }
 .btn-submit,

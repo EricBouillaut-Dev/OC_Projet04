@@ -1,6 +1,5 @@
 function editNav() {
   var x = document.getElementById("myTopnav");
-  console.log(x.classname);
   if (x.className === "topnav") {
     x.className += " responsive";
   } else {
@@ -65,8 +64,9 @@ function clearAllErrors() {
 
 }
 
-
-function validate() {
+// document.getElementById('form').preventDefault();
+// document.getElementById('form')
+// function validate() {
   const firstNameInput = document.getElementById("first");
   const lastNameInput = document.getElementById("last");
   const emailInput = document.getElementById("email");
@@ -74,76 +74,116 @@ function validate() {
   const quantityInput = document.getElementById("quantity");
   const checkbox1Input = document.getElementById("checkbox1");
 
-  let errors = false;
+  const submitForm = document.querySelector('#reserve');
+  submitForm.addEventListener('submit', onSubmit);
 
+  // let errors = false;
+function checkFirstName(){
   // Check first name
   if (firstNameInput.value.trim().length < 2) {
     setError(firstNameInput, "Veuillez entrer au moins 2 caractères pour le prénom.");
-    errors = true;
+    return 1;
   } else {
     clearError(firstNameInput);
   }
+}
 
+function checkLastName(){
   // Check last name
   if (lastNameInput.value.trim().length < 2) {
     setError(lastNameInput, "Veuillez entrer au moins 2 caractères pour le nom.");
-    errors = true;
+    return 1;
   } else {
     clearError(lastNameInput);
   }
+}
 
+function checkEmail(){
   // Check email
   const emailRegex = /^\S+@\S+\.\S+$/;
   if (!emailRegex.test(emailInput.value.trim())) {
     setError(emailInput, "Veuillez entrer une adresse email valide.");
-    errors = true;
+    return 1;
   } else {
     clearError(emailInput);
   }
+}
 
+function checkBirthDate(){
   // Check birthdate
   if (birthdateInput.value == "") {
     setError(birthdateInput, "Veuillez entrer une date de naissance.");
-    errors = true;
+    return 1;
   } else {
     clearError(birthdateInput);
   }
+}
 
+function checkQuantity(){
   // Check quantity
   if (quantityInput.value == "") {
     setError(quantityInput, "Veuillez entrer un nombre de tournoi.");
-    errors = true;
+    return 1;
   } else {
     clearError(quantityInput);
   }
+}
 
+function checkLocation(){
   // Check location
   const isRadioChecked = document.querySelector('input[name="location"]:checked');
   const radioErrorMessage = document.querySelector(".radioErrorMessage");
-  console.log(radioErrorMessage.parentElement)
   if (!isRadioChecked) {
     radioErrorMessage.parentElement.setAttribute("data-error", true);
-    // radioErrorMessage.parentElement.parentElement.setAttribute("data-error", true);
     radioErrorMessage.textContent = "Veuillez choisir un tournoi.";
-    errors = true;
+    return 1;
   } else {
     radioErrorMessage.parentElement.setAttribute("data-error", false);
-    // radioErrorMessage.parentElement.parentElement.setAttribute("data-error", false);
     radioErrorMessage.textContent = "";
   }
-  
+}
+
+function checkCheckBox1(){
   // Check checkbox1
   const formData = checkbox1Input.parentElement;
   const checkbox1ErrorMessage = formData.querySelector(".checkbox1ErrorMessage");
   if (!checkbox1Input.checked) {
     checkbox1ErrorMessage.textContent = "Veuillez accepter les conditions d'utilisation.";
     formData.setAttribute("data-error", true);
-    errors = true;
+    return 1;
   } else {
     checkbox1ErrorMessage.textContent = "";
     formData.setAttribute("data-error", false);
-    // clearError(checkbox1Input);
   }
+}
 
-  return !errors;
+function validForm(){
+  let errors = 0;
+  errors += checkFirstName() ?? 0;
+  errors += checkLastName() ?? 0;
+  errors += checkEmail() ?? 0;
+  errors += checkBirthDate() ?? 0;
+  errors += checkQuantity() ?? 0;
+  errors += checkLocation() ?? 0;
+  errors += checkCheckBox1() ?? 0;
+
+  if(errors === 0){
+    return true;
+  }
+}
+
+function onSubmit(event) {
+  event.preventDefault(); // Empêche la soumission du formulaire
+
+  if(validForm()){
+    const modalbgEnd = document.querySelector(".bgroundEnd");
+    const modalCloseEnd = document.querySelector(".closeEnd");
+    modalbg.style.display = "none";
+    modalbgEnd.style.display = "block";
+
+    modalCloseEnd.addEventListener("click", function() {
+      modalbgEnd.style.display = "none";
+      document.forms["reserve"].reset();
+    });
+  }
 }
