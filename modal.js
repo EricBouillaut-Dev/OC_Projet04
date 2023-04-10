@@ -143,23 +143,29 @@ function checkLocation(){
   }
 }
 
+const formData = checkbox1Input.parentElement; // Parent de la 'checkbox1' = formData
+const checkbox1ErrorMessage = formData.querySelector(".checkbox1ErrorMessage"); // Message d'erreur de la 'checkbox1'
+
+// Test de la 'checkbox1' --> conditions d'utilisation
 function checkCheckBox1(){
-  // Check checkbox1
-  const formData = checkbox1Input.parentElement;
-  const checkbox1ErrorMessage = formData.querySelector(".checkbox1ErrorMessage");
+
+  // On test elle n'est pas cochée'
   if (!checkbox1Input.checked) {
-    checkbox1ErrorMessage.textContent = "Veuillez accepter les conditions d'utilisation.";
-    formData.setAttribute("data-error", true);
-    return 1;
+    checkbox1ErrorMessage.textContent = "Veuillez accepter les conditions d'utilisation."; // On ajoute le message d'erreur
+    formData.setAttribute("data-error", true); // On indique dans le HTML qu'il y a une erreur
+    return 1; // On retourne 1 pour ajouter une erreur
   } else {
-    checkbox1ErrorMessage.textContent = "";
-    formData.setAttribute("data-error", false);
+    checkbox1ErrorMessage.textContent = ""; // On purge le message d'erreur
+    formData.setAttribute("data-error", false); // On indique dans le HTML qu'il n'y a pas d'erreur
   }
 }
 
+// Gestion des erreurs
 function validForm(){
-  let errors = 0;
-  errors += checkFirstName() ?? 0;
+  let errors = 0; // On fixe le nombre d'erreur à 0
+
+  // On ajoute 1 au nombre d'erreurs pour chaque test en contenant une
+  errors += checkFirstName() ?? 0; 
   errors += checkLastName() ?? 0;
   errors += checkEmail() ?? 0;
   errors += checkBirthDate() ?? 0;
@@ -167,23 +173,32 @@ function validForm(){
   errors += checkLocation() ?? 0;
   errors += checkCheckBox1() ?? 0;
 
+  // Si aucune erreur, on retourne la fonction à 'true'
   if(errors === 0){
     return true;
   }
 }
 
+const modalbgEnd = document.querySelector(".bgroundEnd"); // Page de validation
+const modalCloseEnd = document.querySelector(".closeEnd"); // Croix d'annulation de la page de validation
+const modalBtnClose = document.querySelector(".btn-close"); // Bouton de la page de validation
+
+// Fermeture de la page de validation
+function endForm(){ 
+  modalbgEnd.style.display = "none"; // On rend invisible la page de validation
+  document.forms["reserve"].reset(); // On reset le formulaire
+}
+
+// Soumission du formulaire
 function onSubmit(event) {
   event.preventDefault(); // Empêche la soumission du formulaire
 
-  if(validForm()){
-    const modalbgEnd = document.querySelector(".bgroundEnd");
-    const modalCloseEnd = document.querySelector(".closeEnd");
-    modalbg.style.display = "none";
-    modalbgEnd.style.display = "block";
+  // On teste si le formulaire ne comporte aucune erreur
+  if(validForm()){ 
+    modalbg.style.display = "none"; // Si oui, on rend la modale invisible
+    modalbgEnd.style.display = "block"; // et on rend visible la page de validation
 
-    modalCloseEnd.addEventListener("click", function() {
-      modalbgEnd.style.display = "none";
-      document.forms["reserve"].reset();
-    });
+    modalCloseEnd.addEventListener("click", endForm); // On attend 1 click sur la croix de la page de validation
+    modalBtnClose.addEventListener("click", endForm); // On attend 1 click sur le bouton de la page de validation
   }
 }
