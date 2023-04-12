@@ -165,7 +165,7 @@ function checkCheckBox1(){
   }
 }
 
-// Gestion des erreurs
+// Gestion des erreurs et validation
 function validForm(){
   let errors = 0; // On initialise le compteur d'erreur à 0
 

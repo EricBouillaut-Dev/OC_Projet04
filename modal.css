@@ -16,7 +16,7 @@ body {
   flex-direction: column;
   /* background-image: url("background.png"); */
   font-family: var(--font-default);
-  font-size: 18px;
+  font-size: 1rem;
   max-width: 1300px;
   margin: 0 auto;
 }
@@ -31,14 +31,17 @@ img {
 }
 
 .topnav {
-  overflow: hidden;
-  margin: 3.5%;
-}
-.header-logo {
-    float: left;
+  display: flex;
+  justify-content: space-between;
+  
+  /* overflow: hidden; */
+  margin: 3rem 2.5rem 4rem 5.5rem;
 }
 .main-navbar {
-    float: right;
+  font-size: 1.05rem;
+  /* position: relative; */
+  /* padding-right: 2rem; */
+    /* float: right; */
 }
 .topnav a {
   float: left;
@@ -48,7 +51,7 @@ img {
   padding: 12px 12px;
   margin: 5px;
   text-decoration: none;
-  font-size: 20px;
+  /* font-size: 20px; */
   font-family: Roboto, sans-serif;
 }
 
@@ -58,58 +61,31 @@ img {
   border-radius: 15px;
 }
 
-.topnav a.active {
+/* .topnav a.active {
   background-color: #ff0000;
   color: #ffffff;
   border-radius: 15px;
-}
+} */
 
 .topnav .icon {
   display: none;
+  color: red;
+  font-size: 1.5rem;
 }
-
-@media screen and (max-width: 768px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .topnav.responsive {position: relative;}
-  .topnav.responsive .icon {
-    position: absolute;
-    right: 0;
-    top: 0;
-  }
-  .topnav.responsive a {
-    float: none;
-    display: block;
-    text-align: left;
-  }
-}
-
-@media screen and (max-width: 540px) {
-  .topnav a {display: none;}
-  .topnav a.icon {
-    float: right;
-    display: block;
-    margin-top: -15px;
-  }
-} 
-
 main {
   font-size: 130%;
   font-weight: bolder;
   color: black;
-  padding-top: 0.5vw;
+  /* padding-top: 0.5vw;
   padding-left: 2vw;
-  padding-right: 2vw;
-  margin: 1px 20px 15px;
+  padding-right: 2vw; */
+  margin: 0 6rem 3rem 5.5rem;
   border-radius: 2rem;
   text-align: justify;
 }
+
+
+
 
 .modal-btn {
   font-size: 145%;
@@ -339,7 +315,7 @@ form[data-error="true"] span{
   margin-top: 1rem;
   border-radius: 7px;
   font-size: 1rem;
-  padding: 12px 82px;
+  /* padding: 12px 82px; */
   color: #fff;
   cursor: pointer;
   border: 0;
@@ -417,24 +393,30 @@ form[data-error="true"] span{
   padding-bottom: 0;
 }
 .hero-section {
-  min-height: 93vh;
+  /* min-height: 93vh; */
+  /* margin-right: 4rem; */
   border-radius: 10px;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
+  display: flex;
+  /* align-items: flex-start; */
+  /* grid-template-columns: repeat(12, 1fr); */
   overflow: hidden;
-  box-shadow: 0 2px 7px 2px rgba(0, 0, 0, 0.2);
-  margin-bottom: 10px;
+  box-shadow: 0 10px 7px 2px rgba(0, 0, 0, 0.2);
+  /* margin-bottom: 100px; */
+  /* height: 80%; */
+  /* padding-bottom: 2rem; */
 }
 .hero-content {
-  padding: 51px 67px;
+  padding: 3rem 3rem;
   grid-column: span 4;
   background: #232323;
   color: #fff;
   position: relative;
   text-align: left;
-  min-width: 424px;
+  /* flex-basis: 40%; */
+  width: 40%;
+  /* min-width: 424px; */
 }
-.hero-content::after {
+/* .hero-content::after {
   content: "";
   width: 100%;
   height: 100%;
@@ -442,38 +424,48 @@ form[data-error="true"] span{
   position: absolute;
   right: -80px;
   top: 0;
-}
+} */
 .hero-content > * {
   position: relative;
   z-index: 1;
 }
 .hero-headline {
-  font-size: 6rem;
+  font-size: 5.1rem;
+  letter-spacing: 0.2rem;
   font-weight: normal;
   white-space: nowrap;
 }
 .hero-text {
-  width: 146%;
+  width: 100%;
   font-weight: normal;
   margin-top: 57px;
   padding: 0;
+  font-size: 1.3rem;
+  
 }
 .btn-signup {
   outline: none;
   text-transform: capitalize;
   font-size: 1.3rem;
-  padding: 15px 23px;
+  /* padding: 15px 23px; */
   margin: 0;
   margin-top: 59px;
 }
 .hero-img {
-  grid-column: span 8;
+  width: 60%;
+  /* width: 60%; */
+  /* flex-basis: 100%; */
+  /* grid-column: span 8; */
 }
 .hero-img img {
   width: 100%;
   height: 100%;
-  display: block;
+  /* display: block; */
+  /* max-width: 100%; */
+  /* max-height: 80%; */
+
   padding: 0;
+  /* object-fit: cover; */
 }
 .copyrights {
   color: #fe142f;
@@ -488,9 +480,49 @@ form[data-error="true"] span{
 footer {
   padding-left: 2vw;
   padding-right: 2vw;
-  margin: 0 20px;
+  margin: 0 1rem 1rem 0;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
+  .header-logo{
+    margin-top: 1rem;
+  }
+  .header-logo img {
+    width: 125px;
+    height: 23px;
+  }
+  .topnav{
+    margin: 1.5rem 2rem 0 2rem;
+    align-items: flex-start;
+  }
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+    
+  }
+  main{
+    margin: 0 2rem;
+  }
+  .topnav.responsive {
+    position: relative;
+  }
+  .topnav.responsive .icon {
+    position: absolute;
+    right: 0;
+    top: 0;
+  }
+  .topnav.responsive .main-navbar {
+    margin-right: 3rem;
+    /* position: relative; */
+  }
+
+  
+  .topnav.responsive a {
+    float: none;
+    display: block;
+    text-align: left;
+  }
+
   .hero-section {
     display: block;
     box-shadow: unset;
@@ -498,7 +530,9 @@ footer {
   .hero-content {
     background: #fff;
     color: #000;
-    padding: 20px;
+    padding: 0;
+    /* margin: 0; */
+    width: 100%;
   }
   .hero-content::after {
     content: unset;
@@ -507,27 +541,47 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 4.5rem;
-    white-space: normal;
+    font-size: 3rem;
+    font-weight: bold;
+    
+    /* white-space: normal; */
+    
   }
   .hero-text {
     width: unset;
-    font-size: 1.5rem;
+    font-size: 1.1rem;
+    margin-top: 1rem;
+    margin-right: 2rem;
+  }
+  .hero-img{
+    width: 100%;
   }
   .hero-img img {
     border-radius: 10px;
     margin-top: 40px;
+
   }
   .hero-section > .btn-signup {
     display: block;
     margin: 32px auto 10px;
-    padding: 12px 35px;
+    /* padding: 12px 35px; */
   }
   .copyrights {
     margin-top: 50px;
     text-align: center;
   }
 }
+@media screen and (max-width: 540px) {
+  .topnav a {display: none;}
+  .topnav a.icon {
+    float: right;
+    display: block;
+    margin-top: -15px;
+  }
+  .header-logo{
+    margin-top: 0;
+  }
+} 
 
 @keyframes modalopen {
   from {
