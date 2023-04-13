@@ -526,10 +526,15 @@ footer {
     height: 25px;
   }
   .hero-headline {
-    font-size: 3rem;
+    font-size: 2rem;
     font-weight: bold;
   }
-
+  .hero-text{
+    font-size: 0.75rem;
+  }
+  .hero-img{
+    margin-top: 2rem;
+  }
   .topnav a {
     display: none;
   }
@@ -541,7 +546,9 @@ footer {
   .topnav.topnav.responsive a.icon {
     margin-top: -1rem;
   }
-
+label, .text-label, .checkbox-label, .checkbox2-label{
+  font-size: 0.75rem;
+}
   .main-navbar{
     margin-top: -1rem;
   }
