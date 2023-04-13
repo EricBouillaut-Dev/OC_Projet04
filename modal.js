@@ -14,8 +14,6 @@ const modalCloseEnd = document.querySelector(".closeEnd"); // Croix d'annulation
 const modalBtnClose = document.querySelector(".btn-close"); // Bouton de la page de validation
 const menuIcon = document.querySelector(".fa.fa-bars"); // Menu déroulant en mode tablette/mobile
 
-// let resultLocation="";
-
 // Evénements
 submitForm.addEventListener('submit', onSubmit); // On attend la soumission du formulaire
 modalClose.addEventListener("click", resetForm); // On attend un click sur la croix d'annulation de la modale pour la fermer
