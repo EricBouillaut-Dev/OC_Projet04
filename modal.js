@@ -12,6 +12,7 @@ const modalBtn = document.querySelectorAll(".modal-btn"); // Boutons de la modal
 const modalbgEnd = document.querySelector(".bgroundEnd"); // Page de validation
 const modalCloseEnd = document.querySelector(".closeEnd"); // Croix d'annulation de la page de validation
 const modalBtnClose = document.querySelector(".btn-close"); // Bouton de la page de validation
+const menuIcon = document.querySelector(".fa.fa-bars"); // Menu déroulant en mode tablette/mobile
 
 // let resultLocation="";
 
@@ -21,6 +22,7 @@ modalClose.addEventListener("click", resetForm); // On attend un click sur la cr
 modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // On attend un click sur le bouton d'inscription pour lancer la modale
 modalCloseEnd.addEventListener("click", endForm); // On attend 1 click sur la croix de la page de validation pour quitter la modale
 modalBtnClose.addEventListener("click", endForm); // On attend 1 click sur le bouton de la page de validation pour quitter la modale
+menuIcon.addEventListener("click", editNav); // On attend 1 click sur le bouton du menu de navigation
 
 // Affichage du menu déroulant lors du click sur l'icone de la navbar en mode tablette/mobile
 function editNav() {
