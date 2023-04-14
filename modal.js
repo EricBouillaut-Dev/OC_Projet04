@@ -14,6 +14,16 @@ const modalCloseEnd = document.querySelector(".closeEnd"); // Croix d'annulation
 const modalBtnClose = document.querySelector(".btn-close"); // Bouton de la page de validation
 const menuIcon = document.querySelector(".fa.fa-bars"); // Menu déroulant en mode tablette/mobile
 
+
+let oFirstname = "";
+let oLastname = "";
+let oEmail = "";
+let oBirthdate = "";
+let oQuantity = "";
+let oLocation = "";
+let oCheckbox1 = "";
+let oCheckbox2 = "UnChecked";
+
 // Evénements
 submitForm.addEventListener('submit', onSubmit); // On attend la soumission du formulaire
 modalClose.addEventListener("click", resetForm); // On attend un click sur la croix d'annulation de la modale pour la fermer
@@ -82,9 +92,12 @@ function checkFirstName(){
   // Test si inférieur à 2 caratères
   if (firstNameInput.value.trim().length < 2) {
     setError(firstNameInput, "Veuillez entrer au moins 2 caractères pour le prénom."); // Si oui, on affiche le message d'erreur
-    return 1;  // On ajoute 1 au compteur d'erreurs
+    return 1; 
   } else {
+    oFirstname = firstNameInput.value;
     clearError(firstNameInput); // Si non, on supprime l'erreur
+    
+    return 0;
   }
 }
 
@@ -93,9 +106,11 @@ function checkLastName(){
   // Test si inférieur à 2 caratères
   if (lastNameInput.value.trim().length < 2) {
     setError(lastNameInput, "Veuillez entrer au moins 2 caractères pour le nom."); // Si oui, on affiche le message d'erreur
-    return 1; // On ajoute 1 au compteur d'erreurs
+    return 1;
   } else {
+    oLastname = lastNameInput.value;
     clearError(lastNameInput); // Si non, on supprime l'erreur
+    return 0;
   }
 }
 
@@ -105,9 +120,11 @@ function checkEmail(){
   // Test si l'email comporte une erreur
   if (!emailRegex.test(emailInput.value.trim())) {
     setError(emailInput, "Veuillez entrer une adresse email valide."); // Si oui, on affiche le message d'erreur
-    return 1; // On ajoute 1 au compteur d'erreurs
+    return 1;
   } else {
+    oEmail = emailInput.value;
     clearError(emailInput); // Si non, on supprime l'erreur
+    return 0;
   }
 }
 
@@ -116,9 +133,11 @@ function checkBirthDate(){
   // Test si la date est vide
   if (birthdateInput.value == "") {
     setError(birthdateInput, "Veuillez entrer une date de naissance."); // Si oui, on affiche le message d'erreur
-    return 1; // On ajoute 1 au compteur d'erreurs
+    return 1;
   } else {
+    oBirthdate = birthdateInput.value;
     clearError(birthdateInput); // Si non, on supprime l'erreur
+    return 0;
   }
 }
 
@@ -127,9 +146,11 @@ function checkQuantity(){
   // Test si le champs est vide
   if (quantityInput.value == "") {
     setError(quantityInput, "Veuillez entrer un nombre de tournoi."); // Si oui, on affiche le message d'erreur
-    return 1; // On ajoute 1 au compteur d'erreurs
+    return 1;
   } else {
+    oQuantity = quantityInput.value;
     clearError(quantityInput); // Si non, on supprime l'erreur
+    return 0;
   }
 }
 
@@ -137,15 +158,16 @@ function checkQuantity(){
 function checkLocation(){
   const radioErrorMessage = document.querySelector(".radioErrorMessage"); // Message d'erreur des boutons radio
   const isRadioChecked = document.querySelector('input[name="location"]:checked'); // Bouton radio qui est coché (=null s'il n'y en a pas)
-    // On test s'il y a un bouton radio de coché
+  // On test s'il y a un bouton radio de coché
   if (!isRadioChecked) {
     radioErrorMessage.parentElement.setAttribute("data-error", true); // S'il n'y en a pas, on affiche le message d'erreur
     radioErrorMessage.textContent = "Veuillez choisir un tournoi."; // on affiche le message d'erreur
-    return 1; // On ajoute 1 au compteur d'erreurs
+    return 1;
   } else {
+    oLocation = isRadioChecked.value;
     radioErrorMessage.parentElement.setAttribute("data-error", false); // On indique dans le HTML qu'il n'y a pas d'erreur
     radioErrorMessage.textContent = ""; // On purge le message d'erreur
-    // resultLocation = isRadioChecked.value;
+    return 0;
   }
 }
 
@@ -158,29 +180,11 @@ function checkCheckBox1(){
   if (!checkbox1Input.checked) {
     checkbox1ErrorMessage.textContent = "Veuillez accepter les conditions d'utilisation."; // on affiche le message d'erreur
     checkbox1Parent.setAttribute("data-error", true); // On indique dans le HTML qu'il y a une erreur
-    return 1; // On ajoute 1 au compteur d'erreurs
+    return 1;
   } else {
     checkbox1Parent.setAttribute("data-error", false); // On indique dans le HTML qu'il n'y a pas d'erreur
     checkbox1ErrorMessage.textContent = ""; // On purge le message d'erreur
-  }
-}
-
-// Gestion des erreurs et validation
-function validForm(){
-  let errors = 0; // On initialise le compteur d'erreur à 0
-
-  // On ajoute 1 au compteur pour chaque test contenant une erreur
-  errors += checkFirstName() ?? 0; 
-  errors += checkLastName() ?? 0;
-  errors += checkEmail() ?? 0;
-  errors += checkBirthDate() ?? 0;
-  errors += checkQuantity() ?? 0;
-  errors += checkLocation() ?? 0;
-  errors += checkCheckBox1() ?? 0;
-
-  // Si aucune erreur au compteur, on valide le formulaire
-  if(errors === 0){
-    return true;
+    return 0;
   }
 }
 
@@ -193,12 +197,35 @@ function endForm(){
 // Soumission du formulaire
 function onSubmit(event) {
   event.preventDefault(); // Empêche la soumission du formulaire
-
-  // On teste si le formulaire est valide (compteur d'erreur à 0)
-  if(validForm()){ 
+  // On teste si le formulaire est valide
+  if(checkFirstName()+checkLastName()+checkEmail()+checkBirthDate()+checkQuantity()+checkLocation()+checkCheckBox1() === 0){ 
     modalbg.style.display = "none"; // Si oui, on rend la modale invisible
     modalbgEnd.style.display = "block"; // et on rend visible la page de validation
-    // console.log(resultLocation);
-
+    // if(document.querySelector('input[id="checkbox2"]:checked')){
+    //   oCheckbox2="Checked";
+    // };
+    // let resultObject = {
+    //   firstname: `${oFirstname}`,
+    //   lastname : `${oLastname}`,
+    //   email: `${oEmail}`,
+    //   birthdate: `${oBirthdate}`,
+    //   quantity: `${oQuantity}`,
+    //   location: `${oLocation}`,
+    //   checkbox1: "Checked",
+    //   checkbox2: `${oCheckbox2}`
+    // }
+    // exportToJsonFile (resultObject);
   }
 }
+// function exportToJsonFile(jsonData) {
+//   let dataStr = JSON.stringify(jsonData);
+//   let dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+
+//   let exportFileDefaultName = 'data.json';
+
+//   let linkElement = document.createElement('a');
+//   linkElement.setAttribute('href', dataUri);
+//   linkElement.setAttribute('download', exportFileDefaultName);
+//   linkElement.click();
+//   console.log(document);
+// }
