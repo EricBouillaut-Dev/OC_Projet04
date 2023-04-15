@@ -211,7 +211,7 @@ function onSubmit(event) {
   }
 }
 
-// Fermeture de la page de validation
+// Fermeture ou annulation de la page de validation
 function endForm(){ 
   modalbgEnd.style.display = "none"; // On rend invisible la page de validation
   document.forms["reserve"].reset(); // On reset le formulaire
@@ -225,6 +225,7 @@ function exportToJsonFile(jsonData, fileName) {
   linkElement.setAttribute('href', dataUri);
   linkElement.setAttribute('download', fileName);
   linkElement.click();
+  console.log(fileName);
 }
 
 // On affiche l'objet dans le HTML
