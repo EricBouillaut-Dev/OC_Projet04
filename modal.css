@@ -83,25 +83,10 @@ main {
   cursor: pointer;
 }
 
-.modal-btn:hover {
-  background: #3876ac;
-}
-
 .footer {
   margin: 20px;
   padding: 10px;
   font-family: var(--font-slab);
-}
-
-/* Modal form */
-.button {
-  background: #fe142f;
-  margin-top: 0.5em;
-  padding: 1em;
-  color: #fff;
-  border-radius: 15px;
-  cursor: pointer;
-  font-size: 16px;
 }
 
 .button:hover, .btn-submit:hover, .btn-close:hover {
@@ -145,8 +130,9 @@ main {
 .end-headline{
   font-style: normal;
   text-align: center;
-  margin:18.5rem 0 18.5rem 0;
+  margin:18.5rem 0 1rem 0;
 }
+
 
 label {
   font-family: var(--font-default);
@@ -288,10 +274,12 @@ form[data-error="true"] span{
 }
 .btn-submit,
 .btn-signup,
-.btn-close{
+.btn-close,
+.btn-export{
   background: #fe142f;
   display: block;
   margin: 0 auto;
+  text-align: center;
   margin-top: 1rem;
   border-radius: 7px;
   font-size: 1rem;
@@ -300,6 +288,30 @@ form[data-error="true"] span{
   cursor: pointer;
   border: 0;
 }
+
+#show-result{
+  font-family: Verdana, Tahoma, sans-serif;
+  font-size: 1rem;
+  color: lightgreen;
+  font-weight: normal;
+  border: 1px green solid;
+  padding: 1rem;
+  animation-name: showData;
+  animation-duration: 2s;
+}
+
+.btn-export {
+  background: green;
+  margin-bottom: 1rem;
+  animation-name: showData;
+  animation-duration: 2.5s;
+}
+
+.modal-btn:hover,
+.btn-export:hover{
+  background: #3876ac;
+}
+
 /* custom select styles */
 .custom-select {
   position: relative;
@@ -573,3 +585,15 @@ label, .text-label, .checkbox-label, .checkbox2-label{
   }
 }
 
+@keyframes showData {
+  0%{
+    opacity: 0;
+  }
+  30%{
+    opacity: 0;
+  }
+
+  100%{
+    opacity: 1;
+  }
+}
