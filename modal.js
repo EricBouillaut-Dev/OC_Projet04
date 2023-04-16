@@ -5,14 +5,14 @@ const emailInput = document.getElementById("email"); // email
 const birthdateInput = document.getElementById("birthdate"); // Date d'anniversaire
 const quantityInput = document.getElementById("quantity"); // Quantité de tournois
 const checkbox1Input = document.getElementById("checkbox1"); // Coche des conditions d'utilisation
-const submitForm = document.querySelector('#reserve'); // Formulaire
+const submitForm = document.querySelector('.reserve'); // Formulaire
 const modalClose = document.querySelector(".close"); // Croix d'annulation de la modale
 const modalbg = document.querySelector(".bground"); // Fond de la modale
 const modalBtn = document.querySelectorAll(".modal-btn"); // Boutons de la modale
 const modalbgEnd = document.querySelector(".bgroundEnd"); // Page de validation
 const modalCloseEnd = document.querySelector(".closeEnd"); // Croix d'annulation de la page de validation
 const modalBtnClose = document.querySelector(".btn-close"); // Bouton de la page de validation
-const menuIcon = document.querySelector(".fa.fa-bars"); // Menu déroulant en mode tablette/mobile
+const menuIcon = document.querySelector(".icon"); // Menu déroulant en mode tablette/mobile
 const btnExport = document.querySelector(".btn-export"); // Bouton Export des données
 const btnStorage = document.querySelector(".btn-storage"); // Bouton purge du local storage
 const showResult = document.getElementById("show-result"); // Texte du résultat
@@ -31,11 +31,12 @@ btnExport.addEventListener("click", function() { // On attend 1 click sur le bou
   exportToJsonFile(resultObject, `Export_${resultObject.email}.json`);
 });
 
-const localKeyName = "OC_P4_email";
-let emails = [];
+const localKeyName = "OC_P4_email"; // Nom de la clé du local storage
+let emails = []; // Initialisation du tableau des emails uniques
+// Test si la clé du local storage existe
 if(localStorage.getItem(localKeyName)){
   const localStore = localStorage.getItem(localKeyName);
-  emails = JSON.parse(localStore);
+  emails = JSON.parse(localStore); // Si oui, on charge la clé dans le tableau
 };
   
 // Affichage du menu déroulant lors du click sur l'icone de la navbar en mode tablette/mobile

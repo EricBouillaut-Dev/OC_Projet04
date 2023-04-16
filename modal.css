@@ -173,10 +173,10 @@ form[data-error="true"] span{
 }
 .formData[data-error="true"] .text-control, 
 .formData[data-error="true"] #checkbox,
-#reserve[data-error="true"] #blocRadio{
+.reserve[data-error="true"] #blocRadio{
   border: 2px solid #e54858;
 }
-#reserve[data-error="true"] #blocRadio{
+.reserve[data-error="true"] #blocRadio{
   padding: 0 0.5rem 0.5rem 0;
 }
 
