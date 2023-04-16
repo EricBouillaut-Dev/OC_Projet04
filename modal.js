@@ -14,9 +14,10 @@ const modalCloseEnd = document.querySelector(".closeEnd"); // Croix d'annulation
 const modalBtnClose = document.querySelector(".btn-close"); // Bouton de la page de validation
 const menuIcon = document.querySelector(".fa.fa-bars"); // Menu déroulant en mode tablette/mobile
 const btnExport = document.querySelector(".btn-export"); // Bouton Export des données
+const btnStorage = document.querySelector(".btn-storage"); // Bouton purge du local storage
 const showResult = document.getElementById("show-result"); // Texte du résultat
 
-let resultObject=""; // On initialise l'objet contenant les résultats
+let resultObject = ""; // On initialise l'objet contenant les résultats
 
 // Evénements
 submitForm.addEventListener('submit', onSubmit); // On attend la soumission du formulaire
@@ -25,10 +26,18 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // On att
 modalCloseEnd.addEventListener("click", endForm); // On attend 1 click sur la croix de la page de validation pour quitter la modale
 modalBtnClose.addEventListener("click", endForm); // On attend 1 click sur le bouton de la page de validation pour quitter la modale
 menuIcon.addEventListener("click", editNav); // On attend 1 click sur le bouton du menu de navigation
+btnStorage.addEventListener("click", purgeStorage); // On attend 1 click sur le bouton de purge du local storage
 btnExport.addEventListener("click", function() { // On attend 1 click sur le bouton Export des données
   exportToJsonFile(resultObject, `Export_${resultObject.email}`);
 });
 
+const localKeyName = "OC_P4_email";
+let emails = [];
+if(localStorage.getItem(localKeyName)){
+  const localStore = localStorage.getItem(localKeyName);
+  emails = JSON.parse(localStore);
+};
+  
 // Affichage du menu déroulant lors du click sur l'icone de la navbar en mode tablette/mobile
 function editNav() {
   var x = document.getElementById("myTopnav");
@@ -117,9 +126,15 @@ function checkEmail(){
     setError(emailInput, "Veuillez entrer une adresse email valide."); // Si oui, on affiche le message d'erreur
     return false; // et on renvoie l'état false
   } else {
-    // oEmail = emailInput.value;
-    clearError(emailInput); // Si non, on supprime l'erreur
-    return emailInput.value; // et on renvoie la valeur du champs email
+    // Si non, on test si l'email existe déjà
+    if(emails.includes(emailInput.value)){
+      setError(emailInput, "Cette adresse email existe déjà."); // Si oui, on affiche le message d'erreur
+      return false; // et on renvoie l'état false
+    }
+    else{
+      clearError(emailInput); // Si non, on supprime l'erreur
+      return emailInput.value; // et on renvoie la valeur du champs email
+    }
   }
 }
 
@@ -181,14 +196,17 @@ function checkCheckBox1(){
   }
 }
 
+function checkCheckBox2(){
+  let valCheckbox2 = "NOT Checked"; // Valeur par défaut de la checkbox2
+  if(document.querySelector('input[id="checkbox2"]:checked')){ // Si la checkbox2 est cochée
+    valCheckbox2="Checked"; // On lui change de valeur
+  };
+  return valCheckbox2 // On renvoie la valeur
+}
+
 // Soumission du formulaire
 function onSubmit(event) {
   event.preventDefault(); // Empêche la soumission du formulaire
-  let oCheckbox2 = "UnChecked"; // Valeur par défaut de la checkbox2
-
-  if(document.querySelector('input[id="checkbox2"]:checked')){ // Si la checkbox2 est cochée
-    oCheckbox2="Checked"; // On lui change de valeur
-  };
 
   // Création de l'objet contenant les données de l'utilisateur ou les erreurs
   resultObject = {
@@ -199,17 +217,18 @@ function onSubmit(event) {
     quantity: checkQuantity(),
     location: checkLocation(),
     checkbox1: checkCheckBox1(),
-    checkbox2: oCheckbox2
+    checkbox2: checkCheckBox2()
   }
 
   // On vérifie que l'objet ne contient pas d'erreur
   if(!Object.values(resultObject).includes(false)){
+    emails.push(emailInput.value); // On met à jour le tableau des emails uniques
+    localStorage.setItem(localKeyName, JSON.stringify(emails)); // On met à jour le local storage
+
     modalbg.style.display = "none"; // On rend la modale invisible
     modalbgEnd.style.display = "block"; // et on rend visible la page de validation
-  
-    showObj(resultObject); // On affiche le résultat dans le HTML
 
-  
+    showObj(resultObject); // On affiche le résultat dans le HTML
   }
 }
 
@@ -239,4 +258,8 @@ function showObj(obj){
   showResult.innerHTML += "<br>location: " + obj.location;
   showResult.innerHTML += "<br>checkbox1: " + obj.checkbox1;
   showResult.innerHTML += "<br>checkbox2: " + obj.checkbox2;
+}
+function purgeStorage(){
+  localStorage.removeItem(localKeyName);
+  emails=[]
 }
