@@ -16,6 +16,7 @@ const menuIcon = document.querySelector(".fa.fa-bars"); // Menu déroulant en mo
 const btnExport = document.querySelector(".btn-export"); // Bouton Export des données
 const showResult = document.getElementById("show-result"); // Texte du résultat
 
+let resultObject=""; // On initialise l'objet contenant les résultats
 
 // Evénements
 submitForm.addEventListener('submit', onSubmit); // On attend la soumission du formulaire
@@ -24,6 +25,9 @@ modalBtn.forEach((btn) => btn.addEventListener("click", launchModal)); // On att
 modalCloseEnd.addEventListener("click", endForm); // On attend 1 click sur la croix de la page de validation pour quitter la modale
 modalBtnClose.addEventListener("click", endForm); // On attend 1 click sur le bouton de la page de validation pour quitter la modale
 menuIcon.addEventListener("click", editNav); // On attend 1 click sur le bouton du menu de navigation
+btnExport.addEventListener("click", function() { // On attend 1 click sur le bouton Export des données
+  exportToJsonFile(resultObject, `Export_${resultObject.email}`);
+});
 
 // Affichage du menu déroulant lors du click sur l'icone de la navbar en mode tablette/mobile
 function editNav() {
@@ -187,7 +191,7 @@ function onSubmit(event) {
   };
 
   // Création de l'objet contenant les données de l'utilisateur ou les erreurs
-  let resultObject = {
+  resultObject = {
     firstname: checkFirstName(),
     lastname : checkLastName(),
     email: checkEmail(),
@@ -205,9 +209,7 @@ function onSubmit(event) {
   
     showObj(resultObject); // On affiche le résultat dans le HTML
 
-    btnExport.addEventListener("click", function() { // On attend 1 click sur le bouton Export des données
-      exportToJsonFile(resultObject, `Export_${resultObject.email}`);
-    });
+  
   }
 }
 
@@ -225,7 +227,6 @@ function exportToJsonFile(jsonData, fileName) {
   linkElement.setAttribute('href', dataUri);
   linkElement.setAttribute('download', fileName);
   linkElement.click();
-  console.log(fileName);
 }
 
 // On affiche l'objet dans le HTML

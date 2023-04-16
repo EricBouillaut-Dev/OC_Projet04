@@ -297,14 +297,13 @@ form[data-error="true"] span{
   border: 1px green solid;
   padding: 1rem;
   animation-name: showData;
-  animation-duration: 4s;
+  animation-duration: 3s;
 }
 
 .btn-export {
   background: green;
-  margin: 1rem 6rem;
   animation-name: showData;
-  animation-duration: 5s;
+  animation-duration: 4s;
 }
 
 .modal-btn:hover,
