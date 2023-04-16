@@ -28,7 +28,7 @@ modalBtnClose.addEventListener("click", endForm); // On attend 1 click sur le bo
 menuIcon.addEventListener("click", editNav); // On attend 1 click sur le bouton du menu de navigation
 btnStorage.addEventListener("click", purgeStorage); // On attend 1 click sur le bouton de purge du local storage
 btnExport.addEventListener("click", function() { // On attend 1 click sur le bouton Export des données
-  exportToJsonFile(resultObject, `Export_${resultObject.email}`);
+  exportToJsonFile(resultObject, `Export_${resultObject.email}.json`);
 });
 
 const localKeyName = "OC_P4_email";
