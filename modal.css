@@ -29,6 +29,7 @@ img {
   padding-right: 1rem;
 }
 
+/* Header */
 .topnav {
   display: flex;
   justify-content: space-between;
@@ -62,6 +63,7 @@ img {
   font-size: 1.5rem;
 }
 
+/* Main */
 main {
   font-size: 130%;
   font-weight: bolder;
@@ -81,12 +83,6 @@ main {
   padding: 0.75rem 2.5rem;
   border-radius: 1rem;
   cursor: pointer;
-}
-
-.footer {
-  margin: 20px;
-  padding: 10px;
-  font-family: var(--font-slab);
 }
 
 .btn-submit:hover, .btn-close:hover {
@@ -123,6 +119,7 @@ main {
   padding-top: 10px;
 }
 
+/* modal */
 .modal-body {
   padding: 15px 8%;
   margin: 15px auto;
@@ -454,9 +451,14 @@ form[data-error="true"] span{
 .hero-section > .btn-signup {
   display: none;
 }
-/* .bloc-storage{
-  display: flex;
-} */
+
+/* footer */
+.footer {
+  margin: 20px;
+  padding: 10px;
+  font-family: var(--font-slab);
+}
+
 footer {
   padding-left: 2vw;
   padding-right: 2vw;
@@ -523,8 +525,9 @@ footer {
     display: none;
   }
   .hero-headline {
-    font-size: 3.2rem;
+    font-size: 3.5rem;
     font-weight: bold;
+    letter-spacing: normal;
   }
   .hero-text {
     width: unset;
@@ -536,6 +539,10 @@ footer {
     width: 100%;
     margin-top: 3rem;
     margin-bottom: 1rem;
+  }
+  .hero-img img{
+    border-radius: 10px;
+
   }
   .hero-section > .btn-signup {
     display: block;
@@ -553,22 +560,27 @@ footer {
     height: 25px;
   }
   .hero-headline {
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bold;
   }
   .hero-text{
-    font-size: 0.75rem;
+    font-size: 1rem;
+
   }
   .hero-img{
     margin-top: 2rem;
   }
   .topnav a {
     display: none;
+    padding: 0.4rem 0.5rem;
+    font-size: 0.8rem;
+    margin: 0;
   }
   .topnav a.icon {
     float: right;
     display: block;
     margin-top: 0;
+    padding: 0.3rem 0.4rem;
   }
   .topnav.topnav.responsive a.icon {
     margin-top: -1rem;
