@@ -141,13 +141,16 @@ function checkEmail(){
 
 // Test de la date d'anniversaire
 function checkBirthDate(){
-  // Test si la date est vide
-  if (birthdateInput.value == "") {
-    setError(birthdateInput, "Veuillez entrer une date de naissance."); // Si oui, on affiche le message d'erreur
+  const valBirthDate = birthdateInput.value; // Valeur du birthDate (au format date)
+  const age = Math.floor((Date.now() - Date.parse(valBirthDate)) / (365.25 * 24 * 60 * 60 * 1000)); // calcul de l'âge en années
+
+  // Test si la date est vide ou si l'age est inférieur à 12 ans
+  if ((valBirthDate == "") || (age < 12)) {
+    setError(birthdateInput, "Veuillez entrer une date de naissance.(age minimum = 12ans)"); // Si oui, on affiche le message d'erreur
     return false; // et on renvoie l'état false
   } else {
     clearError(birthdateInput); // Si non, on supprime l'erreur
-    return birthdateInput.value; // et on renvoie la valeur du champs date de naissance
+    return valBirthDate; // et on renvoie la valeur du champs date de naissance
   }
 }
 
@@ -163,7 +166,7 @@ function checkQuantity(){
   }
 }
 
-// Test de la location (ville des tournois)
+// Test de la localisation (ville des tournois)
 function checkLocation(){
   const radioErrorMessage = document.querySelector(".radioErrorMessage"); // Message d'erreur des boutons radio
   const isRadioChecked = document.querySelector('input[name="location"]:checked'); // Bouton radio qui est coché (=null s'il n'y en a pas)
@@ -173,8 +176,7 @@ function checkLocation(){
     radioErrorMessage.textContent = "Veuillez choisir un tournoi."; // on affiche le message d'erreur
     return false; // et on renvoie l'état false
   } else {
-    // oLocation = isRadioChecked.value;
-    radioErrorMessage.parentElement.setAttribute("data-error", false); // On indique dans le HTML qu'il n'y a pas d'erreur
+    radioErrorMessage.parentElement.setAttribute("data-error", false); // Sinon, on indique dans le HTML qu'il n'y a pas d'erreur
     radioErrorMessage.textContent = ""; // On purge le message d'erreur
     return isRadioChecked.value; // On renvoie la valeur de la location
   }
