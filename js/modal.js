@@ -141,11 +141,14 @@ function checkEmail(){
 
 // Test de la date d'anniversaire
 function checkBirthDate(){
-  const valBirthDate = birthdateInput.value; // Valeur du birthDate (au format date)
-  const age = Math.floor((Date.now() - Date.parse(valBirthDate)) / (365.25 * 24 * 60 * 60 * 1000)); // calcul de l'âge en années
+  const valBirthDate = new Date(birthdateInput.value); // Valeur du birthDate (au format date)
+  const today = new Date(); // Date d'aujourd'hui
+  const diffTime = today.getTime() - valBirthDate.getTime(); // Différence entre les dates
+  const diffDays = diffTime / (1000 * 3600 * 24); // Conversion en jours
+  const age = diffDays / 365.25; // Conversion en années
 
   // Test si la date est vide ou si l'age est inférieur à 12 ans
-  if ((valBirthDate == "") || (age < 12)) {
+  if ((birthdateInput.value == "") || (age < 12)) {
     setError(birthdateInput, "Veuillez entrer une date de naissance.(age minimum = 12ans)"); // Si oui, on affiche le message d'erreur
     return false; // et on renvoie l'état false
   } else {
