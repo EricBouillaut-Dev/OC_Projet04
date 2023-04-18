@@ -153,7 +153,7 @@ function checkBirthDate(){
     return false; // et on renvoie l'état false
   } else {
     clearError(birthdateInput); // Si non, on supprime l'erreur
-    return valBirthDate; // et on renvoie la valeur du champs date de naissance
+    return birthdateInput.value; // et on renvoie la valeur du champs date de naissance
   }
 }
 
