@@ -121,7 +121,7 @@ function checkLastName(){
 
 // Test de l'email
 function checkEmail(){
-  const emailRegex = /^\S+@\S+\.\S+$/; // Condition d'un email valide
+  const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/; // Condition d'un email valide
   // Test si l'email comporte une erreur
   if (!emailRegex.test(emailInput.value.trim())) {
     setError(emailInput, "Veuillez entrer une adresse email valide."); // Si oui, on affiche le message d'erreur
